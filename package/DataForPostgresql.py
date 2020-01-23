@@ -2,12 +2,19 @@ from tkinter import *
 from tkinter import messagebox
 from ConnectToPostgresql import connect
 
+
 def connectFrame():
-    def leftClick():
-        if connect(host_blank.get(), dataBaseName_blank.get(),
-            port_blank.get(), user_blank.get(), password_blank.get()
-            ):
+    def checkConnect():
+        if connect(host_blank.get(), port_blank.get(), dataBaseName_blank.get(), user_blank.get(), password_blank.get()):
+            dataConnect = [host_blank.get(), port_blank.get(), dataBaseName_blank.get(), user_blank.get(), password_blank.get()]
             root.destroy()
+            f = open("package/Data.py", "w+")
+            f.write("Host = '" + str(dataConnect[0]) + "'\n")
+            f.write("Port = '" + str(dataConnect[1]) + "'\n")
+            f.write("Database = '" + str(dataConnect[2]) + "'\n")
+            f.write("User = '" + str(dataConnect[3]) + "'\n")
+            f.write("Password = '" + str(dataConnect[4]) + "'\n")
+            f.close()
         else:
             messagebox.showinfo('Bài Tập Tuần 2', 'Something wrong !! Check again')
     root = Tk()
@@ -39,7 +46,7 @@ def connectFrame():
     user_blank.grid(row=3, column=2)
     password_blank.grid(row=4, column=2)
 
-    button1 = Button(root, text="Connect", command=leftClick)
+    button1 = Button(root, text="Connect", command=checkConnect)
     button1.grid(row=5, column=2)
 
     root.mainloop()

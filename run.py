@@ -1,10 +1,14 @@
 import os, sys
 import psycopg2
-lib_path = os.path.abspath(os.path.join('function'))
+lib_path = os.path.abspath(os.path.join('package'))
 sys.path.append(lib_path)
 from tkinter import *
 from tkinter import messagebox
-from function.ConnectToPostgresql import connect
-from function.DataForPostgresql import connectFrame
+from package.ConnectToPostgresql import connect
+from package.DataForPostgresql import connectFrame
+from package.AddData import addData
+from package.menu import menu
 
-connectFrame()
+dataConnect = connectFrame()
+menu()
+
